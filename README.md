@@ -11,4 +11,4 @@ This project includes 1 main function and 7 subfunctions
 7. objFun.r: The function returns the value of objective function in certain iteration;
 8. Main.r: The mian function involk above 7 subfunctions and selected cluster-aware features for data.
 ---------------------------------
-To use this method, please modify your data format as the ExampleData and then run the file Main.r
+To use this method, please read your data format as cells in rows and genes in colums and then run the file Main.r
