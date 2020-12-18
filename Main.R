@@ -22,6 +22,8 @@ findL <- function(x)
   return(temp)
 }
 
+data <- read.csv(......)# cell*gene matrix
+
 c0cnt <- apply(data,2,find0)
 loc <- which(c0cnt>0.98)
 if(length(loc)>0)
