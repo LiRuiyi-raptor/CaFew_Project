@@ -22,7 +22,8 @@ findL <- function(x)
   return(temp)
 }
 
-data <- read.csv(......)# cell*gene matrix
+data <- read.csv(......) # input a cell*gene matrix
+K <-  # input the number of clusters
 
 c0cnt <- apply(data,2,find0)
 loc <- which(c0cnt>0.98)
@@ -44,7 +45,6 @@ if(length(loc)>0)
 
 distType="CITYBLOCK"
 k_delta=0.001
-K <- length(unique(o_clust$clustLable))
 inRe <- Init(data,K,distType,k_delta)
 center <- inRe$center
 cls <- inRe$cls
@@ -59,7 +59,6 @@ while (i < 51)
   weight <- re$weight
   cls <- Patition(data,center,weight,distType)
   center <- updateCenter(data,cls,K,center)
-  #cls <- Patition(data,center,weight,distType)
   delta <- updateDelta(data,center,cls,weight,K,k_delta)
   iterR1[i,1] <- objFun(data,center,cls,weight,delta,K,distType)
   i <- i+1
@@ -71,7 +70,9 @@ max_w <- as.matrix(apply(weight,2,max))
 hr <- hist(max_w)
 th1 <- hr$breaks[2]
 RetainIndex1 <- which(max_w[,1]>=th1)
-data1 <- data[,RetainIndex1]
+data1 <- data[,RetainIndex1] # The result after the first selecting step
+
+
 weight1 <- weight[,RetainIndex1]
 while(ncol(data1)>10000)
 {
@@ -91,4 +92,4 @@ fR <- lm(log(CV^2)~log10(x))
 difV <- fR$residuals
 p_value <- pnorm(-abs(scale(difV, center=TRUE,scale=TRUE)))
 RetainIndex2 <- which(p_value<=0.05)
-data2 <- data1[,RetainIndex2]
+data2 <- data1[,RetainIndex2] # The result after the second selecting step
